@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container" style="margin-top: 4em; text-align: center;">
+        <h1 style="text-shadow: 2px 1px 2px grey;">Vehiculos</h1>
+        <hr style="margin-bottom: 2em;">
+        <form style="padding: 3em; background-color: rgb(122 124 127); border-radius: 5px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p style="margin-left: -46%;">Elija el tipo de vehiculo: </p>
+                    </div>    
+                     <div class="col-sm-4">
+                        <p style="margin-left: -47%;">Ingrese la velocidad del vehiculo: </p>
+                    </div>    
+                     <div class="col-sm-4">
+                        <p style="margin-left: -63%;">Elija la cantidad de pasajeros: </p>
+                    </div>    
+
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <select class="custom-select" id="selectVehiculo" required>
+                            <option selected disabled value="">Elija un vehiculo</option>
+                            <option>Carro</option>
+                            <option>Moto</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="text" id="txtVelocidad" class="form-control" placeholder="Ingrese una velocidad">
+                    </div>
+                    <div>
+                        <p>Km</p>
+                    </div>
+                    <div class="col">
+                        <input type="text" id="txtPasajeros" class="form-control" placeholder="Ingrese cantidad de personas">
+                    </div>
+                    <br>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" id="btnCalcular" class="btn btn-secondary" onclick=Calcular()>Calcular</button>
+                    </div>
+                </div>
+            </br></br></br>
+                <div>
+                    <p id="txt_salida"></p>
+                </div>
+
+        </form>
+
+
+        </div>
+        <script>
+           
+            function Calcular(Vehiculo, Velocidad, Pasajeros) {
+                var vehiculo = $('#selectVehiculo').val();
+                var velocidad = $('#txtVelocidad').val();
+                var pasajeros = $('#txtPasajeros').val();
+
+                $.ajax({
+                    url: "index.php",
+                    type: "GET",
+                    data: {"vehiculo" : vehiculo, "velocidad" : velocidad, "pasajeros" : pasajeros}
+                }).done(function(response) {
+                        $('#txt_salida').html(response);
+                });
+
+            }
+        </script>
+</body>
+
+</html>
